@@ -1,7 +1,7 @@
 name: flutter_video_newfeed
 description: A video new feed
 version: 0.0.1
-homepage: https://git.baikal.io/mobile/boilerplate/mobile-flutter-module/flutter_video_newfeed
+homepage: https://github.com/quochuynh67/flutter_video_newfeed
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

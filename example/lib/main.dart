@@ -56,37 +56,37 @@ class _MyHomePageState extends State<MyHomePage>
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4')
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
     ]);
   }
 
@@ -98,37 +98,37 @@ class _MyHomePageState extends State<MyHomePage>
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
       VideoInfo(
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
           url:
-              'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4')
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
     ]);
   }
 }
