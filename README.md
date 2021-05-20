@@ -10,7 +10,11 @@ This module will provide the list of video in the newfeed screen like tiktok.
 ```yaml
   flutter_video_newfeed:
     git:
-      url: https://git.baikal.io/mobile/boilerplate/mobile-flutter-module/flutter_video_newfeed.git
+      url: https://github.com/quochuynh67/flutter_video_newfeed
+      
+   or
+   
+   flutter_video_newfeed: 0.0.1
 ```
 ## Implement Video API
  For example you create your own model class
@@ -30,7 +34,7 @@ class YourApi implement VideoNewFeedApi<YourOwnModel>{
           userName: "quochuynh96",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
-          url:'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+          url:'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
     ]);
   }
 
@@ -41,7 +45,7 @@ class YourApi implement VideoNewFeedApi<YourOwnModel>{
           userName: "quochuynh96 load more",
           liked: true,
           songName: "Đưa tay lên nào, mãi bên nhau bạn nhé!",
-          url:'https://rainbow-video-transcoded-bucket.s3-ap-southeast-1.amazonaws.com/watermark-backcam_1616302466623.mp4'),
+          url:'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
     ]);
 }
 ```
