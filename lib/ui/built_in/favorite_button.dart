@@ -40,8 +40,8 @@ class _FavoriteButtonState extends State<FavoriteButton>
     return InkWell(
       onTap: () {
         _isFavorite = !_isFavorite;
-        var s= widget.onFavoriteClicked(_isFavorite);
-        if(s==null) return;
+        var s = widget.onFavoriteClicked(_isFavorite);
+        if (s == null) return;
         if (_isFavorite) {
           _controller.animateTo(1.0, duration: Duration(milliseconds: 300));
         } else {
@@ -58,8 +58,8 @@ class _FavoriteButtonState extends State<FavoriteButton>
       child: Container(
         child: Lottie.asset("assets/lottie_heart.json", controller: _controller,
             onLoaded: (composition) {
-              _controller..duration = composition.duration;
-            }),
+          _controller..duration = composition.duration;
+        }),
         width: 50,
         height: 50,
       ),
