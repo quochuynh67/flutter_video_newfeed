@@ -12,6 +12,7 @@ This module will provide the list of video in the newfeed screen like tiktok.
     git:
       url: https://github.com/quochuynh67/flutter_video_newfeed
 ```
+or
 ```yaml
     flutter_video_newfeed: 1.0.0
 ```
