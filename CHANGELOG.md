@@ -1,3 +1,7 @@
+## [1.0.0]
+
+* TODO: Migrate null-safety
+
 ## [0.0.1+2]
 
 * TODO: Change description and reformat code.
