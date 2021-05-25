@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_video_newfeed/config/video_item_config.dart';
 import 'package:flutter_video_newfeed/model/video.dart';
@@ -70,10 +72,20 @@ class _VideoItemWidgetState<V extends VideoInfo>
   @override
   Widget build(BuildContext context) {
     _pauseAndPlayVideo();
+    bool isLandscape = false;
+    if (_videoPlayerController!.value.initialized) {
+      isLandscape = _videoPlayerController!.value.size.width >
+          _videoPlayerController!.value.size.height;
+    }
+
     return Center(
       child: Stack(
         children: [
-          initialized ? _renderVideo() : Container(),
+          initialized
+              ? isLandscape
+                  ? _renderLandscapeVideo()
+                  : _renderPortraitVideo()
+              : Container(),
           _renderVideoInfo(),
         ],
       ),
@@ -140,12 +152,36 @@ class _VideoItemWidgetState<V extends VideoInfo>
     }
   }
 
-  Widget _renderVideo() {
+  Widget _renderLandscapeVideo() {
     return Center(
       child: AspectRatio(
-        aspectRatio: widget.config.customAspectRatio ??
-            _videoPlayerController!.value.aspectRatio,
         child: VideoPlayer(_videoPlayerController),
+        aspectRatio: _videoPlayerController!.value.aspectRatio,
+      ),
+    );
+  }
+
+  Widget _renderPortraitVideo() {
+    var tmp = MediaQuery.of(context).size;
+
+    var screenH = max(tmp.height, tmp.width);
+    var screenW = min(tmp.height, tmp.width);
+    tmp = _videoPlayerController!.value.size;
+
+    var previewH = max(tmp.height, tmp.width);
+    var previewW = min(tmp.height, tmp.width);
+    var screenRatio = screenH / screenW;
+    var previewRatio = previewH / previewW;
+
+    return Center(
+      child: OverflowBox(
+        child: VideoPlayer(_videoPlayerController),
+        maxHeight: screenRatio > previewRatio
+            ? screenH
+            : screenW / previewW * previewH,
+        maxWidth: screenRatio > previewRatio
+            ? screenH / previewH * previewW
+            : screenW,
       ),
     );
   }
