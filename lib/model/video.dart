@@ -1,8 +1,8 @@
 class VideoInfo {
-  String url;
-  String userName;
-  String songName;
-  bool liked;
+  String? url;
+  String? userName;
+  String? songName;
+  bool? liked;
 
   VideoInfo({
     this.url,

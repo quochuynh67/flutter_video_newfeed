@@ -5,7 +5,7 @@ class FavoriteButton extends StatefulWidget {
   final Future<bool> Function(bool) onFavoriteClicked;
   final bool initFavorite;
 
-  FavoriteButton({@required this.onFavoriteClicked, this.initFavorite = false});
+  FavoriteButton({required this.onFavoriteClicked, this.initFavorite = false});
 
   @override
   State<StatefulWidget> createState() {
@@ -16,7 +16,7 @@ class FavoriteButton extends StatefulWidget {
 class _FavoriteButtonState extends State<FavoriteButton>
     with TickerProviderStateMixin {
   bool _isFavorite = false;
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {

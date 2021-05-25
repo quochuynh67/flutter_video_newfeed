@@ -12,13 +12,13 @@ class VideoItemWidget<V extends VideoInfo> extends StatefulWidget {
 
   /// Video ended callback
   ///
-  final void Function() videoEnded;
+  final void Function()? videoEnded;
 
   final VideoItemConfig config;
 
   /// Video Information: like count, like, more, name song, ....
   ///
-  final VideoInfo videoInfo;
+  final V videoInfo;
 
 //  /// Video network url
 //  ///
@@ -26,25 +26,25 @@ class VideoItemWidget<V extends VideoInfo> extends StatefulWidget {
 
   /// Video Info Customizable
   ///
-  final Widget Function(BuildContext context, V v) customVideoInfoWidget;
+  final Widget Function(BuildContext context, V v)? customVideoInfoWidget;
 
   VideoItemWidget(
       {
 
       /// video information
-      this.videoInfo,
+      required this.videoInfo,
 
       /// video config
       this.config = const VideoItemConfig(
           loop: true,
           itemLoadingWidget: CircularProgressIndicator(),
           autoPlayNextVideo: true),
-      this.pageIndex,
-      this.currentPageIndex,
-      this.isPaused,
+      required this.pageIndex,
+      required this.currentPageIndex,
+      required this.isPaused,
       this.customVideoInfoWidget,
       this.videoEnded})
-      : assert(videoInfo != null && videoInfo.url != null);
+      : assert(videoInfo.url != null);
 
   @override
   State<StatefulWidget> createState() => _VideoItemWidgetState<V>();
@@ -52,7 +52,7 @@ class VideoItemWidget<V extends VideoInfo> extends StatefulWidget {
 
 class _VideoItemWidgetState<V extends VideoInfo>
     extends State<VideoItemWidget<V>> {
-  VideoPlayerController _videoPlayerController;
+  late VideoPlayerController? _videoPlayerController;
   bool initialized = false;
   bool actualDisposed = false;
   bool isEnded = false;
@@ -85,8 +85,8 @@ class _VideoItemWidgetState<V extends VideoInfo>
   @override
   void dispose() {
     if (_videoPlayerController != null) {
-      _videoPlayerController.removeListener(_videoListener);
-      _videoPlayerController.dispose();
+      _videoPlayerController!.removeListener(_videoListener);
+      _videoPlayerController!.dispose();
       _videoPlayerController = null;
     }
 
@@ -100,10 +100,10 @@ class _VideoItemWidgetState<V extends VideoInfo>
     // Init video from network url
     _videoPlayerController =
         VideoPlayerController.network(widget.videoInfo.url);
-    _videoPlayerController.addListener(_videoListener);
-    _videoPlayerController.initialize().then((_) {
+    _videoPlayerController!.addListener(_videoListener);
+    _videoPlayerController!.initialize().then((_) {
       setState(() {
-        _videoPlayerController.setLooping(widget.config.loop);
+        _videoPlayerController!.setLooping(widget.config.loop);
         initialized = true;
       });
     });
@@ -112,17 +112,17 @@ class _VideoItemWidgetState<V extends VideoInfo>
   /// Video controller listener
   ///
   void _videoListener() {
-    if (_videoPlayerController.value.position != null &&
-        _videoPlayerController.value.duration != null) {
+    if (_videoPlayerController!.value.position != null &&
+        _videoPlayerController!.value.duration != null) {
       /// check if video has ended
       ///
-      if (_videoPlayerController.value.position >=
-          _videoPlayerController.value.duration) {
+      if (_videoPlayerController!.value.position >=
+          _videoPlayerController!.value.duration) {
         if (widget.config.autoPlayNextVideo &&
             widget.videoEnded != null &&
             !isEnded) {
           isEnded = true;
-          widget.videoEnded();
+          widget.videoEnded!();
         }
       }
     }
@@ -133,9 +133,9 @@ class _VideoItemWidgetState<V extends VideoInfo>
       if (widget.pageIndex == widget.currentPageIndex &&
           !widget.isPaused &&
           initialized) {
-        _videoPlayerController.play().then((value) {});
+        _videoPlayerController!.play().then((value) {});
       } else {
-        _videoPlayerController.pause().then((value) {});
+        _videoPlayerController!.pause().then((value) {});
       }
     }
   }
@@ -144,7 +144,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
     return Center(
       child: AspectRatio(
         aspectRatio: widget.config.customAspectRatio ??
-            _videoPlayerController.value.aspectRatio,
+            _videoPlayerController!.value.aspectRatio,
         child: VideoPlayer(_videoPlayerController),
       ),
     );
@@ -157,7 +157,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
       width: w,
       height: h,
       child: widget.customVideoInfoWidget != null
-          ? widget.customVideoInfoWidget(context, widget.videoInfo)
+          ? widget.customVideoInfoWidget!(context, widget.videoInfo)
           : DefaultVideoInfoWidget(),
     );
   }

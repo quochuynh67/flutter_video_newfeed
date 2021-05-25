@@ -13,11 +13,11 @@ class ScreenConfig {
 
   /// when no result, can customize the empty widget
   ///
-  final Widget emptyWidget;
+  final Widget? emptyWidget;
 
   const ScreenConfig({
-    this.backgroundColor,
-    this.loadingWidget,
+    required this.backgroundColor,
+    required this.loadingWidget,
     this.emptyWidget,
   });
 }

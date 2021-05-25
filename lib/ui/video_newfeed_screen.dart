@@ -24,8 +24,8 @@ class VideoNewFeedScreen<V extends VideoInfo> extends StatefulWidget {
       backgroundColor: Colors.black,
       loadingWidget: CircularProgressIndicator(),
     ),
-    @required this.api,
-  }) : assert(api != null);
+    required this.api,
+  });
 
   @override
   State<StatefulWidget> createState() => _VideoNewFeedScreenState<V>();
@@ -35,7 +35,7 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
     extends State<VideoNewFeedScreen<V>> {
   /// PageController
   ///
-  PageController _pageController;
+  late PageController _pageController;
 
   /// Current page is on screen
   ///
@@ -64,14 +64,14 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
   ///
   void _scrollListener() {
     if (_isOnPageTurning &&
-        _pageController.page == _pageController.page.roundToDouble()) {
+        _pageController.page == _pageController.page!.roundToDouble()) {
       setState(() {
-        _currentPage = _pageController.page.toInt();
+        _currentPage = _pageController.page!.toInt();
         _isOnPageTurning = false;
       });
     } else if (!_isOnPageTurning &&
         _currentPage.toDouble() != _pageController.page) {
-      if ((_currentPage.toDouble() - _pageController.page).abs() > 0.7) {
+      if ((_currentPage.toDouble() - _pageController.page!).abs() > 0.7) {
         setState(() {
           _isOnPageTurning = true;
         });
@@ -115,7 +115,7 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
     return StreamBuilder<List<VideoInfo>>(
         stream: _listVideoStream.stream,
         builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.isEmpty)
+          if (!snapshot.hasData || snapshot.data!.isEmpty)
             return Center(
                 child: widget.screenConfig.emptyWidget ??
                     Column(
@@ -128,11 +128,11 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
           return PageView.builder(
             scrollDirection: Axis.vertical,
             controller: _pageController,
-            itemCount: snapshot.data.length,
+            itemCount: snapshot.data!.length,
             onPageChanged: (page) {},
             itemBuilder: (context, index) {
               return VideoItemWidget(
-                videoInfo: snapshot.data[index],
+                videoInfo: snapshot.data![index],
                 pageIndex: index,
                 currentPageIndex: _currentPage,
                 isPaused: _isOnPageTurning,

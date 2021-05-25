@@ -12,14 +12,14 @@ class VideoItemConfig {
   /// In case: use to change aspect ratio
   /// Default: video ratio
   ///
-  final double customAspectRatio;
+  final double? customAspectRatio;
 
   final Widget itemLoadingWidget;
 
   const VideoItemConfig({
-    this.loop,
-    this.autoPlayNextVideo,
-    this.itemLoadingWidget,
+    this.loop = true,
+    this.autoPlayNextVideo = false,
+    required this.itemLoadingWidget,
     this.customAspectRatio,
   });
 }
