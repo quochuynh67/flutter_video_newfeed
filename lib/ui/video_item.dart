@@ -73,7 +73,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
   Widget build(BuildContext context) {
     _pauseAndPlayVideo();
     bool isLandscape = false;
-    if (_videoPlayerController!.value.initialized) {
+    if (_videoPlayerController!.value.isInitialized) {
       isLandscape = _videoPlayerController!.value.size.width >
           _videoPlayerController!.value.size.height;
     }
@@ -109,9 +109,10 @@ class _VideoItemWidgetState<V extends VideoInfo>
   /// Video initialization
   ///
   void _initVideoController() {
+    if (widget.videoInfo.url == null) return;
     // Init video from network url
     _videoPlayerController =
-        VideoPlayerController.network(widget.videoInfo.url);
+        VideoPlayerController.network(widget.videoInfo.url!);
     _videoPlayerController!.addListener(_videoListener);
     _videoPlayerController!.initialize().then((_) {
       setState(() {
@@ -145,23 +146,26 @@ class _VideoItemWidgetState<V extends VideoInfo>
       if (widget.pageIndex == widget.currentPageIndex &&
           !widget.isPaused &&
           initialized) {
-        _videoPlayerController!.play().then((value) {});
+        _videoPlayerController?.play().then((value) {});
       } else {
-        _videoPlayerController!.pause().then((value) {});
+        _videoPlayerController?.pause().then((value) {});
       }
     }
   }
 
   Widget _renderLandscapeVideo() {
+    if (_videoPlayerController == null) return Container();
     return Center(
       child: AspectRatio(
-        child: VideoPlayer(_videoPlayerController),
+        child: VideoPlayer(_videoPlayerController!),
         aspectRatio: _videoPlayerController!.value.aspectRatio,
       ),
     );
   }
 
   Widget _renderPortraitVideo() {
+    if (_videoPlayerController == null) return Container();
+
     var tmp = MediaQuery.of(context).size;
 
     var screenH = max(tmp.height, tmp.width);
@@ -175,7 +179,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
 
     return Center(
       child: OverflowBox(
-        child: VideoPlayer(_videoPlayerController),
+        child: VideoPlayer(_videoPlayerController!),
         maxHeight: screenRatio > previewRatio
             ? screenH
             : screenW / previewW * previewH,

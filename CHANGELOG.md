@@ -1,3 +1,8 @@
+## [1.0.0+2]
+
+* Upgrade video_player version
+* Update README
+
 ## [1.0.0+1]
 
 * Make the video player fullscreen when portrait video [https://github.com/quochuynh67/flutter_video_newfeed/issues/2](https://github.com/quochuynh67/flutter_video_newfeed/issues/2)
