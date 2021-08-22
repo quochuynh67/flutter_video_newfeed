@@ -1,3 +1,7 @@
+## [1.0.1]
+
+* Fix: Undefined customVideoInfoWidget
+
 ## [1.0.0+2]
 
 * Upgrade video_player version
