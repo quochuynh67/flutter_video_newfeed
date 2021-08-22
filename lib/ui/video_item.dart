@@ -28,9 +28,9 @@ class VideoItemWidget<V extends VideoInfo> extends StatefulWidget {
 
   /// Video Info Customizable
   ///
-  final Widget Function(BuildContext context, V v)? customVideoInfoWidget;
+  final Widget? customVideoInfoWidget;
 
-  VideoItemWidget(
+  const VideoItemWidget(
       {
 
       /// video information
@@ -45,8 +45,7 @@ class VideoItemWidget<V extends VideoInfo> extends StatefulWidget {
       required this.currentPageIndex,
       required this.isPaused,
       this.customVideoInfoWidget,
-      this.videoEnded})
-      : assert(videoInfo.url != null);
+      this.videoEnded});
 
   @override
   State<StatefulWidget> createState() => _VideoItemWidgetState<V>();
@@ -71,9 +70,9 @@ class _VideoItemWidgetState<V extends VideoInfo>
   ///
   @override
   Widget build(BuildContext context) {
-    _pauseAndPlayVideo();
     bool isLandscape = false;
-    if (_videoPlayerController!.value.isInitialized) {
+    _pauseAndPlayVideo();
+    if (initialized && _videoPlayerController!.value.isInitialized) {
       isLandscape = _videoPlayerController!.value.size.width >
           _videoPlayerController!.value.size.height;
     }
@@ -96,7 +95,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
   ///
   @override
   void dispose() {
-    if (_videoPlayerController != null) {
+    if (initialized && _videoPlayerController != null) {
       _videoPlayerController!.removeListener(_videoListener);
       _videoPlayerController!.dispose();
       _videoPlayerController = null;
@@ -125,8 +124,10 @@ class _VideoItemWidgetState<V extends VideoInfo>
   /// Video controller listener
   ///
   void _videoListener() {
-    if (_videoPlayerController!.value.position != null &&
-        _videoPlayerController!.value.duration != null) {
+    if (!initialized) return;
+
+    if (_videoPlayerController?.value.position != null &&
+        _videoPlayerController?.value.duration != null) {
       /// check if video has ended
       ///
       if (_videoPlayerController!.value.position >=
@@ -142,7 +143,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
   }
 
   void _pauseAndPlayVideo() {
-    if (_videoPlayerController != null) {
+    if (initialized && _videoPlayerController != null) {
       if (widget.pageIndex == widget.currentPageIndex &&
           !widget.isPaused &&
           initialized) {
@@ -154,6 +155,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
   }
 
   Widget _renderLandscapeVideo() {
+    if (!initialized) return Container();
     if (_videoPlayerController == null) return Container();
     return Center(
       child: AspectRatio(
@@ -164,6 +166,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
   }
 
   Widget _renderPortraitVideo() {
+    if (!initialized) return Container();
     if (_videoPlayerController == null) return Container();
 
     var tmp = MediaQuery.of(context).size;
@@ -197,7 +200,7 @@ class _VideoItemWidgetState<V extends VideoInfo>
       width: w,
       height: h,
       child: widget.customVideoInfoWidget != null
-          ? widget.customVideoInfoWidget!(context, widget.videoInfo)
+          ? widget.customVideoInfoWidget
           : DefaultVideoInfoWidget(),
     );
   }

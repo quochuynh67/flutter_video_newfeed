@@ -39,12 +39,20 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class TestModel extends VideoInfo {
+  String test;
+
+  TestModel(this.test);
+}
+
 class _MyHomePageState extends State<MyHomePage>
     implements VideoNewFeedApi<VideoInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: VideoNewFeedScreen(api: this),
+      body: VideoNewFeedScreen<VideoInfo>(
+        api: this,
+      ),
     );
   }
 

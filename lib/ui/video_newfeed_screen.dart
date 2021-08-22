@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_video_newfeed/api/api.dart';
 import 'package:flutter_video_newfeed/config/screen_config.dart';
+import 'package:flutter_video_newfeed/config/video_item_config.dart';
 import 'package:flutter_video_newfeed/model/video.dart';
 import 'package:flutter_video_newfeed/ui/video_item.dart';
 import 'package:lottie/lottie.dart';
@@ -15,15 +16,38 @@ class VideoNewFeedScreen<V extends VideoInfo> extends StatefulWidget {
   ///
   final bool keepPage;
 
+  ///
+  /// Screen config
   final ScreenConfig screenConfig;
+
+  ///
+  /// Video Item config
+  final VideoItemConfig config;
+
   final VideoNewFeedApi<V> api;
 
-  VideoNewFeedScreen({
+  /// Video ended callback
+  ///
+  final void Function()? videoEnded;
+
+  /// Video Info Customizable
+  ///
+  final Widget Function(BuildContext context, V v)? customVideoInfoWidget;
+
+  const VideoNewFeedScreen({
     this.keepPage = false,
     this.screenConfig = const ScreenConfig(
       backgroundColor: Colors.black,
       loadingWidget: CircularProgressIndicator(),
     ),
+
+    /// video config
+    this.config = const VideoItemConfig(
+        loop: true,
+        itemLoadingWidget: CircularProgressIndicator(),
+        autoPlayNextVideo: true),
+    this.customVideoInfoWidget,
+    this.videoEnded,
     required this.api,
   });
 
@@ -136,6 +160,11 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
                 pageIndex: index,
                 currentPageIndex: _currentPage,
                 isPaused: _isOnPageTurning,
+                config: widget.config,
+                videoEnded: widget.videoEnded,
+                customVideoInfoWidget: widget.customVideoInfoWidget != null
+                    ? widget.customVideoInfoWidget!(context, temps[index])
+                    : null,
               );
             },
           );
