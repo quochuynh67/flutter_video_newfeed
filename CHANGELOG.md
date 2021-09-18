@@ -1,3 +1,11 @@
+## [1.0.3]
+
+* Pause video controller when the video widget is hidden
+
+## [1.0.2]
+
+* test
+
 ## [1.0.1]
 
 * Fix: Undefined customVideoInfoWidget

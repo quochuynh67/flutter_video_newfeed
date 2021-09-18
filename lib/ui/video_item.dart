@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_video_newfeed/config/video_item_config.dart';
 import 'package:flutter_video_newfeed/model/video.dart';
 import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import 'built_in/default_video_info.dart';
 
@@ -159,7 +160,10 @@ class _VideoItemWidgetState<V extends VideoInfo>
     if (_videoPlayerController == null) return Container();
     return Center(
       child: AspectRatio(
-        child: VideoPlayer(_videoPlayerController!),
+        child: VisibilityDetector(
+            child: VideoPlayer(_videoPlayerController!),
+            onVisibilityChanged: _handleVisibilityDetector,
+            key: Key('key_${widget.currentPageIndex}')),
         aspectRatio: _videoPlayerController!.value.aspectRatio,
       ),
     );
@@ -182,7 +186,10 @@ class _VideoItemWidgetState<V extends VideoInfo>
 
     return Center(
       child: OverflowBox(
-        child: VideoPlayer(_videoPlayerController!),
+        child: VisibilityDetector(
+            onVisibilityChanged: _handleVisibilityDetector,
+            key: Key('key_${widget.currentPageIndex}'),
+            child: VideoPlayer(_videoPlayerController!)),
         maxHeight: screenRatio > previewRatio
             ? screenH
             : screenW / previewW * previewH,
@@ -203,5 +210,20 @@ class _VideoItemWidgetState<V extends VideoInfo>
           ? widget.customVideoInfoWidget
           : DefaultVideoInfoWidget(),
     );
+  }
+
+  void _handleVisibilityDetector(VisibilityInfo info) {
+    if (info.visibleFraction == 0) {
+      if (!actualDisposed &&
+          widget.pageIndex == widget.currentPageIndex &&
+          !widget.isPaused &&
+          initialized) {
+        if (_videoPlayerController != null) {
+          _videoPlayerController?.pause().then((value) {});
+        }
+      }
+    } else {
+      _videoPlayerController?.play().then((value) {});
+    }
   }
 }

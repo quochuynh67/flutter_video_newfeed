@@ -39,12 +39,6 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class TestModel extends VideoInfo {
-  String test;
-
-  TestModel(this.test);
-}
-
 class _MyHomePageState extends State<MyHomePage>
     implements VideoNewFeedApi<VideoInfo> {
   @override
@@ -52,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage>
     return Scaffold(
       body: VideoNewFeedScreen<VideoInfo>(
         api: this,
+
       ),
     );
   }
@@ -139,4 +134,10 @@ class _MyHomePageState extends State<MyHomePage>
               'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
     ]);
   }
+}
+
+class TestModel extends VideoInfo {
+  String test;
+
+  TestModel(this.test);
 }
